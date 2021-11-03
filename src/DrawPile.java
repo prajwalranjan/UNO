@@ -1,9 +1,15 @@
 import java.util.*;
 
 public class DrawPile {
-	public Stack<Card> cardsPile = new Stack<Card>();
+	private Stack<Card> cardsPile = new Stack<Card>();
 	
-	DrawPile() {
-		;
+	DrawPile(ArrayList<Card> cards) {
+		for(Card c: cards) {
+			this.cardsPile.add(c);
+		}
+	}
+	
+	public Card returnTopCard() {
+		return this.cardsPile.pop();
 	}
 }
