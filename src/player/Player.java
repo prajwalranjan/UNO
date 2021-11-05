@@ -11,7 +11,7 @@ public class Player {
 	@SuppressWarnings("unused")
 	private int playerNumber;
 	
-	Player(String name, DrawPile deck, int playerNumber) {
+	public Player(String name, DrawPile deck, int playerNumber) {
 		this.playerName = name;
 		this.playerNumber = playerNumber;
 		for(int i=0; i<7; i++) {

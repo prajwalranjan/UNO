@@ -15,4 +15,8 @@ public class DrawPile {
 	public Card returnTopCard() {
 		return this.cardsPile.pop();
 	}
+	
+	public void addCard(Card c) {
+		this.cardsPile.add(c);
+	}
 }

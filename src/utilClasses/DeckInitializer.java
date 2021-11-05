@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class DeckInitializer {
+	
+	public pile.DiscardPile discardPile;
+	private pile.DrawPile drawPile;
+	
 	public ArrayList<card.NormalCard> createNormalCards() {
 		ArrayList<card.NormalCard> normalCards = new ArrayList<card.NormalCard>();
 		
@@ -54,7 +58,7 @@ public class DeckInitializer {
 		}
 		
 		for(card.SpecialCard sc: specialCards) {
-			cardsDeck.add(nc);
+			cardsDeck.add(sc);
 		}
 		
 		Collections.shuffle(cardsDeck);
@@ -62,5 +66,18 @@ public class DeckInitializer {
 		pile.DrawPile drawPile = new pile.DrawPile(cardsDeck);
 		
 		return drawPile;
+	}
+	
+	public DeckInitializer() {
+		this.drawPile = this.createDrawPile(this.createSpecialCards(), this.createNormalCards());
+		this.discardPile = new pile.DiscardPile();
+	}
+	
+	public pile.DrawPile getDrawPile() {
+		return this.drawPile;
+	}
+	
+	public pile.DiscardPile getDiscardPile() {
+		return this.discardPile;
 	}
 }
