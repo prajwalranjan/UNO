@@ -1,4 +1,9 @@
+package player;
 import java.util.*;
+
+import card.Card;
+import pile.DiscardPile;
+import pile.DrawPile;
 
 public class Player {
 	private String playerName;

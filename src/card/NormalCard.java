@@ -1,17 +1,18 @@
+package card;
 
-public class SpecialCard implements Card {
+public class NormalCard implements Card {
 	private String cardColor;
-	private String cardAttribute;
-	private String cardType = "Special";
+	private String cardNumber;
+	private String cardType = "Normal";
 	
-	SpecialCard(String color, String attribute) {
+	public NormalCard(String color, String number) {
 		this.cardColor = color;
-		this.cardAttribute = attribute;
+		this.cardNumber = number;
 	}
 	
 	public void displayCard() {
 		System.out.println("Card color: " + this.cardColor);
-		System.out.println("Card attribute: " + this.cardAttribute);
+		System.out.println("Card number: " + this.cardNumber);
 	}
 	
 	public String getCardColor() {
@@ -19,7 +20,7 @@ public class SpecialCard implements Card {
 	}
 	
 	public String getCardDetails() {
-		return this.cardAttribute;
+		return this.cardNumber;
 	}
 	
 	public String getCardType() {

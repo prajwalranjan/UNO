@@ -1,9 +1,12 @@
+package pile;
 import java.util.*;
+
+import card.Card;
 
 public class DrawPile {
 	private Stack<Card> cardsPile = new Stack<Card>();
 	
-	DrawPile(ArrayList<Card> cards) {
+	public DrawPile(ArrayList<Card> cards) {
 		for(Card c: cards) {
 			this.cardsPile.add(c);
 		}
