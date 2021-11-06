@@ -5,10 +5,9 @@ import card.Card;
 import pile.DiscardPile;
 import pile.DrawPile;
 
-public class Player {
+public class Player implements Runnable {
 	private String playerName;
 	private List<Card> playerHand = new ArrayList<Card>();
-	@SuppressWarnings("unused")
 	private int playerNumber;
 	
 	public Player(String name, DrawPile deck, int playerNumber) {
@@ -17,6 +16,11 @@ public class Player {
 		for(int i=0; i<7; i++) {
 			this.playerHand.add(deck.returnTopCard());
 		}
+	}
+	
+	@Override
+	public void run() {
+		
 	}
 	
 	public String getPlayerName() {
@@ -34,6 +38,13 @@ public class Player {
 	
 	public void removeCard(DiscardPile discardDeck, int pos) {
 		discardDeck.discardDeck.add(this.playerHand.remove(pos));
+	}
+	
+	public void showPlayerHand() {
+		System.out.println("Player hand: ");
+		for(card.Card c: this.playerHand) {
+			c.displayCard();
+		}
 	}
 	
 	public int checkForValidCard(DiscardPile discardDeck) {
