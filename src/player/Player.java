@@ -1,13 +1,17 @@
+package player;
 import java.util.*;
 
-public class Player {
+import card.Card;
+import pile.DiscardPile;
+import pile.DrawPile;
+
+public class Player implements Runnable {
 	private String playerName;
 	private List<Card> playerHand = new ArrayList<Card>();
-	@SuppressWarnings("unused")
 	private int playerNumber;
 	Scanner sc = new Scanner(System.in);
 	
-	Player(String name, DrawPile deck, int playerNumber) {
+	public Player(String name, DrawPile deck, int playerNumber) {
 		this.playerName = name;
 		this.playerNumber = playerNumber;
 		for(int i=0; i<7; i++) {
@@ -109,6 +113,11 @@ public class Player {
 			}
 	}
 	
+	@Override
+	public void run() {
+		
+	}
+	
 	public String getPlayerName() {
 		return this.playerName;
 	}
@@ -145,6 +154,12 @@ public class Player {
 		return -1;
 	}
 	
+	public void showPlayerHand() {
+		System.out.println("Player hand: ");
+		for(card.Card c: this.playerHand) {
+			c.displayCard();
+		}
+	}
 	public int checkForValidSpecialCard(DiscardPile discardDeck) {
 		Card topCard = discardDeck.returnTopCard();
 		

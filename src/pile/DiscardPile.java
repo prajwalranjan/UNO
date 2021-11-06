@@ -1,14 +1,22 @@
+package pile;
 import java.util.*;
 
+import card.Card;
+
 public class DiscardPile {
-	public Stack<Card> discardDeck = new Stack<Card>();
+	public Stack<card.Card> discardDeck;
 	public String topColor;
 	
-	DiscardPile(Card c) {
+	public DiscardPile() {
+		this.discardDeck = new Stack<card.Card>();
+	}
+	
+	public DiscardPile(card.Card c) {
+		this.discardDeck = new Stack<card.Card>();
 		this.discardDeck.add(c);
 	}
 	
-	public Card returnTopCard() {
+	public card.Card returnTopCard() {
 		return this.discardDeck.lastElement();
 	}
 	
