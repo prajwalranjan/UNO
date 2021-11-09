@@ -25,7 +25,6 @@ public class MainGame {
 		
 		player.Player[] players = createPlayers(4, sc, drawPile);
 		
-		Thread[] playerThreads = new Thread[4];
 		
 	}
 

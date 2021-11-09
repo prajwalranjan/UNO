@@ -5,23 +5,20 @@ import card.Card;
 import pile.DiscardPile;
 import pile.DrawPile;
 
-public class Player implements Runnable {
-	private String playerName;
+public class Player extends Thread {
+	final private String playerName;
 	private List<Card> playerHand = new ArrayList<Card>();
 	private int playerNumber;
 	
 	public Player(String name, DrawPile deck, int playerNumber) {
 		this.playerName = name;
-		this.playerNumber = playerNumber;
+		this.setPlayerNumber(playerNumber);
 		for(int i=0; i<7; i++) {
 			this.playerHand.add(deck.returnTopCard());
 		}
 	}
 	
-	@Override
-	public void run() {
-		
-	}
+	
 	
 	public String getPlayerName() {
 		return this.playerName;
@@ -67,6 +64,14 @@ public class Player implements Runnable {
 		}
 		
 		return -1;
+	}
+
+	public int getPlayerNumber() {
+		return playerNumber;
+	}
+
+	public void setPlayerNumber(int playerNumber) {
+		this.playerNumber = playerNumber;
 	}
 	
 	

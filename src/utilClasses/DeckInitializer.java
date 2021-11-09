@@ -5,8 +5,8 @@ import java.util.Collections;
 
 public class DeckInitializer {
 	
-	public pile.DiscardPile discardPile;
-	private pile.DrawPile drawPile;
+	static public pile.DiscardPile discardPile;
+	static private pile.DrawPile drawPile;
 	
 	public ArrayList<card.NormalCard> createNormalCards() {
 		ArrayList<card.NormalCard> normalCards = new ArrayList<card.NormalCard>();
