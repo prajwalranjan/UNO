@@ -6,17 +6,24 @@ import pile.DiscardPile;
 import pile.DrawPile;
 
 public class Player extends Thread {
+	
 	final private String playerName;
 	private List<Card> playerHand = new ArrayList<Card>();
 	private int playerNumber;
+	
+	public pile.DrawPile drawPile;
+	public pile.DiscardPile discardPile;
+	
 	Scanner sc = new Scanner(System.in);
 	
-	public Player(String name, DrawPile deck, int playerNumber) {
+	public Player(String name, int playerNumber, pile.DiscardPile discardPile, pile.DrawPile drawPile) {
 		this.playerName = name;
 		this.setPlayerNumber(playerNumber);
 		for(int i=0; i<7; i++) {
-			this.playerHand.add(deck.returnTopCard());
+			this.playerHand.add(drawPile.returnTopCard());
 		}
+		this.discardPile = discardPile;
+		this.drawPile = drawPile;
 	}
 
 	public void playerTurn(DiscardPile discardDeck, DrawPile deck){
@@ -46,6 +53,7 @@ public class Player extends Thread {
 					}
 				}
 				break;
+				
 			case "Skip":
 				for(int i=0;i<this.playerHand.size();i++){
 					Card c = this.playerHand.get(i);
@@ -62,6 +70,7 @@ public class Player extends Thread {
 					pickCard(deck);
 				}
 				break;
+				
 			case "DrawFour":
 				for(int i = 0;i<4;i++){
 						pickCard(deck);
@@ -70,6 +79,7 @@ public class Player extends Thread {
 				String color = sc.next();
 				discardDeck.setNewTopColor(color);
 				break;
+				
 			default :
 				for(int i=0;i<this.playerHand.size();i++){
 					Card c = this.playerHand.get(i);
@@ -101,8 +111,8 @@ public class Player extends Thread {
 						flag=false;
 						if(discardDeck.returnTopCard().getCardDetails().equals("DrawFour")||discardDeck.returnTopCard().getCardDetails().equals("Wild")){
 							System.out.println("Choose the Color: ");
-							String color = sc.next();
-							discardDeck.setNewTopColor(color);
+							String color1 = sc.next();
+							discardDeck.setNewTopColor(color1);
 						}
 						break;
 					}
@@ -113,7 +123,11 @@ public class Player extends Thread {
 			}
 	}
 	
-	
+	@Override
+	public void run() {
+		System.out.println("Player " + this.playerNumber +  "playing... ");
+		this.playerTurn(this.discardPile, this.drawPile);
+	}
 	
 	public String getPlayerName() {
 		return this.playerName;
@@ -131,6 +145,7 @@ public class Player extends Thread {
 	public void removeCard(DiscardPile discardDeck, int pos) {
 		discardDeck.discardDeck.add(this.playerHand.remove(pos));
 	}
+	
 	public int checkForValidNormalCard(DiscardPile discardDeck) {
 		
 		Card topCard = discardDeck.returnTopCard();
@@ -157,6 +172,11 @@ public class Player extends Thread {
 			c.displayCard();
 		}
 	}
+	
+	public int numCardsLeft() {
+		return this.playerHand.size();
+	}
+	
 	public int checkForValidSpecialCard(DiscardPile discardDeck) {
 		Card topCard = discardDeck.returnTopCard();
 		

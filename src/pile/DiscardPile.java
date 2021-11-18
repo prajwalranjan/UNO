@@ -1,8 +1,6 @@
 package pile;
 import java.util.*;
 
-import card.Card;
-
 public class DiscardPile {
 	public Stack<card.Card> discardDeck;
 	public String topColor;
