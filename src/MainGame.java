@@ -37,6 +37,13 @@ public class MainGame {
 			
 			if(topCard.getCardType().equals("Normal")) {
 				currentPlayer.start();
+			} else if(topCard.getCardType().equals("Special")) {
+				String topCardAttr = topCard.getCardDetails();
+				switch(topCardAttr) {
+				case("Reverse"):
+					currentPlayerNumber = (4+(currentPlayerNumber-1))%4;
+					break;
+				}
 			}
 			
 			if(currentPlayer.numCardsLeft()==0) {
