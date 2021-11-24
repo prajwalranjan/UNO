@@ -14,6 +14,10 @@ public class DiscardPile {
 		this.discardDeck.add(c);
 	}
 	
+	public void addCardToPile(card.Card c) {
+		this.discardDeck.add(c);
+	}
+	
 	public card.Card returnTopCard() {
 		return this.discardDeck.lastElement();
 	}

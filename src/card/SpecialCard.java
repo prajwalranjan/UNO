@@ -1,6 +1,6 @@
 package card;
 
-public class SpecialCard implements Card {
+public class SpecialCard extends Card {
 	private String cardColor;
 	private String cardAttribute;
 	private String cardType = "Special";

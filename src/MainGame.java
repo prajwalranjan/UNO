@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class MainGame {
@@ -14,7 +15,8 @@ public class MainGame {
 		return players;
 	}
 
-	public static void main(String[] args) {
+	@SuppressWarnings("deprecation")
+	public static void main(String[] args) throws NoSuchElementException {
 		System.out.println("***** Welcome to UNO! *****");
 		
 		utilClasses.DeckInitializer deckInitializer = new utilClasses.DeckInitializer();
@@ -30,18 +32,42 @@ public class MainGame {
 		
 		System.out.println("Let's begin!");
 		
+		discardPile.addCardToPile(drawPile.returnTopCard());
+		
 		while(true) {			
 			card.Card topCard = discardPile.returnTopCard();
 			currentPlayer = players[currentPlayerNumber];
 			topCard.displayCard();
 			
-			if(topCard.getCardType().equals("Normal")) {
+			if(topCard.getCardType().equals("Normal")) { //Normal card
 				currentPlayer.start();
-			} else if(topCard.getCardType().equals("Special")) {
+				currentPlayerNumber = (currentPlayerNumber+1)%4;
+			} else if(topCard.getCardType().equals("Special")) { //Special card
 				String topCardAttr = topCard.getCardDetails();
+//				String topCardColor = topCard.getCardColor();
+				
 				switch(topCardAttr) {
 				case("Reverse"):
 					currentPlayerNumber = (4+(currentPlayerNumber-1))%4;
+					break;
+					
+				case("Skip"):
+					currentPlayerNumber = ((currentPlayerNumber+1))%4;
+					break;
+				
+				case("DrawTwo"):
+					currentPlayer.start();
+					currentPlayerNumber = (currentPlayerNumber+1)%4;
+					break;
+				
+				case("DrawFour"):
+					currentPlayer.start();
+					currentPlayerNumber = (currentPlayerNumber+1)%4;
+					break;
+				
+				case("Wild"):
+					currentPlayer.start();
+					currentPlayerNumber = (currentPlayerNumber+1)%4;
 					break;
 				}
 			}
@@ -49,11 +75,11 @@ public class MainGame {
 			if(currentPlayer.numCardsLeft()==0) {
 				break;
 			}
-			currentPlayerNumber = (currentPlayerNumber+1)%4;
+			
+			currentPlayer.stop();
 		}
 		
 		System.out.println("Winner: ");
-//		player[currentPlayer-1]
 		
 	}
 

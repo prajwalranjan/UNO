@@ -26,6 +26,12 @@ public class Player extends Thread {
 		this.drawPile = drawPile;
 	}
 
+	@Override
+	public void run() {
+		System.out.println("Player " + this.playerNumber +  " playing... ");
+		this.playerTurn(this.discardPile, this.drawPile);
+	}
+	
 	public void playerTurn(DiscardPile discardDeck, DrawPile deck){
 		Card topc = discardDeck.returnTopCard();
 		boolean flag = true;
@@ -121,12 +127,6 @@ public class Player extends Thread {
 					pickCard(deck);
 				}
 			}
-	}
-	
-	@Override
-	public void run() {
-		System.out.println("Player " + this.playerNumber +  "playing... ");
-		this.playerTurn(this.discardPile, this.drawPile);
 	}
 	
 	public String getPlayerName() {

@@ -1,8 +1,19 @@
 package card;
 
-public interface Card {
-	public void displayCard();
-	public String getCardColor();
-	public String getCardDetails();
-	public String getCardType();
+public class Card {
+	public void displayCard() {
+		
+	}
+	
+	public String getCardColor() {
+		return "";
+	}
+	
+	public String getCardDetails() {
+		return "";
+	}
+	
+	public String getCardType() {
+		return "";
+	}
 }

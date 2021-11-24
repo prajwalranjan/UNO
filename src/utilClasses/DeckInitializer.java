@@ -28,7 +28,7 @@ public class DeckInitializer {
 		ArrayList<card.SpecialCard> specialCards = new ArrayList<card.SpecialCard>();
 		
 		for(int i=0; i<4; i++) {
-			card.SpecialCard draw4 = new card.SpecialCard("Black", "Draw4");
+			card.SpecialCard draw4 = new card.SpecialCard("Black", "DrawFour");
 			specialCards.add(draw4);
 		}
 		
@@ -38,7 +38,7 @@ public class DeckInitializer {
 		}
 		
 		String[] colors = {"Yellow", "Red", "Blue", "Green"};
-		String[] attributes = {"Reverse", "Skip", "Draw2"};
+		String[] attributes = {"Reverse", "Skip", "DrawTwo"};
 		
 		for(String color: colors) {
 			for(String attr: attributes) {
