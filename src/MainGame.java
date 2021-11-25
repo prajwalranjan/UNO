@@ -28,7 +28,8 @@ public class MainGame {
 		player.Player[] players = createPlayers(4, sc, drawPile, discardPile);
 		player.Player currentPlayer;
 		
-		int startingPlayerNumber = 0, currentPlayerNumber = startingPlayerNumber;
+		int startingPlayerNumber = 0;
+		int currentPlayerNumber = startingPlayerNumber;
 		
 		System.out.println("Let's begin!");
 		
@@ -44,7 +45,6 @@ public class MainGame {
 				currentPlayerNumber = (currentPlayerNumber+1)%4;
 			} else if(topCard.getCardType().equals("Special")) { //Special card
 				String topCardAttr = topCard.getCardDetails();
-//				String topCardColor = topCard.getCardColor();
 				
 				switch(topCardAttr) {
 				case("Reverse"):
@@ -76,8 +76,12 @@ public class MainGame {
 				break;
 			}
 			
-			currentPlayer.stop();
+			if(currentPlayer.isAlive()) {
+				currentPlayer.suspend();
+			}
 		}
+		
+		sc.close();
 		
 		System.out.println("Winner: ");
 		

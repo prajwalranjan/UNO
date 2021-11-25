@@ -205,7 +205,4 @@ public class Player extends Thread {
 	public void setPlayerNumber(int playerNumber) {
 		this.playerNumber = playerNumber;
 	}
-	
-	
-	
 }
