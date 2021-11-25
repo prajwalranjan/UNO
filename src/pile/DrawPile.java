@@ -1,7 +1,17 @@
-package pile;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Pile;
+
+/**
+ *
+ * @author ujjwaljain
+ */
+
 import java.util.*;
 
-import card.Card;
+import Card.Card;
 
 public class DrawPile {
 	private Stack<Card> cardsPile = new Stack<Card>();

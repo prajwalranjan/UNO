@@ -1,37 +1,39 @@
-package player;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Player;
+
+//package player;
 import java.util.*;
 
-import card.Card;
-import pile.DiscardPile;
-import pile.DrawPile;
+import Card.Card;
+import Pile.DiscardPile;
+import Pile.DrawPile;
 
-public class Player extends Thread {
-	
-	final private String playerName;
-	private List<Card> playerHand = new ArrayList<Card>();
+public class Player implements Runnable {
+	private String playerName;
+	public ArrayList<Card> playerHand = new ArrayList<Card>();
 	private int playerNumber;
-	
-	public pile.DrawPile drawPile;
-	public pile.DiscardPile discardPile;
-	
+        public DrawPile drawPile;
+	public DiscardPile discardPile;
 	Scanner sc = new Scanner(System.in);
 	
-	public Player(String name, int playerNumber, pile.DiscardPile discardPile, pile.DrawPile drawPile) {
+	public Player(String name, int playerNumber, DiscardPile discardPile, DrawPile deck) {
 		this.playerName = name;
-		this.setPlayerNumber(playerNumber);
+		this.playerNumber = playerNumber;
 		for(int i=0; i<7; i++) {
-			this.playerHand.add(drawPile.returnTopCard());
+			this.playerHand.add(deck.returnTopCard());
 		}
-		this.discardPile = discardPile;
+                this.discardPile = discardPile;
 		this.drawPile = drawPile;
 	}
-
-	@Override
+        @Override
 	public void run() {
 		System.out.println("Player " + this.playerNumber +  " playing... ");
 		this.playerTurn(this.discardPile, this.drawPile);
 	}
-	
+
 	public void playerTurn(DiscardPile discardDeck, DrawPile deck){
 		Card topc = discardDeck.returnTopCard();
 		boolean flag = true;
@@ -59,7 +61,6 @@ public class Player extends Thread {
 					}
 				}
 				break;
-				
 			case "Skip":
 				for(int i=0;i<this.playerHand.size();i++){
 					Card c = this.playerHand.get(i);
@@ -72,20 +73,15 @@ public class Player extends Thread {
 						break;
 					}
 				}
-				if(flag){
-					pickCard(deck);
-				}
 				break;
-				
 			case "DrawFour":
 				for(int i = 0;i<4;i++){
 						pickCard(deck);
 				}
 				System.out.println("Choose the Color: ");
-				String color = sc.next();
-				discardDeck.setNewTopColor(color);
+				String dfcolor = sc.next();
+				discardDeck.setNewTopColor(dfcolor);
 				break;
-				
 			default :
 				for(int i=0;i<this.playerHand.size();i++){
 					Card c = this.playerHand.get(i);
@@ -117,8 +113,8 @@ public class Player extends Thread {
 						flag=false;
 						if(discardDeck.returnTopCard().getCardDetails().equals("DrawFour")||discardDeck.returnTopCard().getCardDetails().equals("Wild")){
 							System.out.println("Choose the Color: ");
-							String color1 = sc.next();
-							discardDeck.setNewTopColor(color1);
+							String color = sc.next();
+							discardDeck.setNewTopColor(color);
 						}
 						break;
 					}
@@ -131,6 +127,14 @@ public class Player extends Thread {
 	
 	public String getPlayerName() {
 		return this.playerName;
+	}
+        
+        public int getPlayerTurn(){
+            return this.playerNumber;
+        }
+        
+        public int numCardsLeft() {
+		return this.playerHand.size();
 	}
 	
 	public void displayPlayerInfo() {
@@ -145,7 +149,6 @@ public class Player extends Thread {
 	public void removeCard(DiscardPile discardDeck, int pos) {
 		discardDeck.discardDeck.add(this.playerHand.remove(pos));
 	}
-	
 	public int checkForValidNormalCard(DiscardPile discardDeck) {
 		
 		Card topCard = discardDeck.returnTopCard();
@@ -168,15 +171,10 @@ public class Player extends Thread {
 	
 	public void showPlayerHand() {
 		System.out.println("Player hand: ");
-		for(card.Card c: this.playerHand) {
+		for(Card c: this.playerHand) {
 			c.displayCard();
 		}
 	}
-	
-	public int numCardsLeft() {
-		return this.playerHand.size();
-	}
-	
 	public int checkForValidSpecialCard(DiscardPile discardDeck) {
 		Card topCard = discardDeck.returnTopCard();
 		
@@ -196,14 +194,6 @@ public class Player extends Thread {
 			}
 		}
 		return -1;
-	}
-
-	public int getPlayerNumber() {
-		return playerNumber;
-	}
-
-	public void setPlayerNumber(int playerNumber) {
-		this.playerNumber = playerNumber;
 	}
 	
 	
