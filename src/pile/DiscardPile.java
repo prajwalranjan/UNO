@@ -1,27 +1,39 @@
-package pile;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Pile;
+
+/**
+ *
+ * @author ujjwaljain
+ */
 import java.util.*;
 
+import Card.Card;
+
 public class DiscardPile {
-	public Stack<card.Card> discardDeck;
+	public Stack<Card> discardDeck;
 	public String topColor;
 	
 	public DiscardPile() {
-		this.discardDeck = new Stack<card.Card>();
+		this.discardDeck = new Stack<Card>();
 	}
 	
-	public DiscardPile(card.Card c) {
-		this.discardDeck = new Stack<card.Card>();
+	public DiscardPile(Card c) {
+		this.discardDeck = new Stack<Card>();
 		this.discardDeck.add(c);
 	}
 	
-	public void addCardToPile(card.Card c) {
-		this.discardDeck.add(c);
-	}
-	
-	public card.Card returnTopCard() {
+	public Card returnTopCard() {
 		return this.discardDeck.lastElement();
 	}
-	
+        public void removeTopCard() {
+                this.discardDeck.remove(this.returnTopCard());
+	}
+	public void addCardToPile(Card c) {
+		this.discardDeck.add(c);
+	}
 	public void setNewTopColor(String newColor) {
 		this.topColor = newColor;
 	}

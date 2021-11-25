@@ -1,22 +1,32 @@
-package utilClasses;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package UtilClasses;
 
+/**
+ *
+ * @author ujjwaljain
+ */
+import Pile.*;
+import Card.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class DeckInitializer {
 	
-	static public pile.DiscardPile discardPile;
-	static private pile.DrawPile drawPile;
+	public DiscardPile discardPile;
+	private DrawPile drawPile;
 	
-	public ArrayList<card.NormalCard> createNormalCards() {
-		ArrayList<card.NormalCard> normalCards = new ArrayList<card.NormalCard>();
+	public ArrayList<NormalCard> createNormalCards() {
+		ArrayList<NormalCard> normalCards = new ArrayList<NormalCard>();
 		
-		String[] colors = {"Yellow", "Red", "Blue", "Green"};
+		String[] colors = {"yellow", "red", "blue", "green"};
 		String[] numbers = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
 		
 		for(String color: colors) {
 			for(String number: numbers) {
-				card.NormalCard normalCard = new card.NormalCard(color, number);
+				NormalCard normalCard = new NormalCard(color, number);
 				normalCards.add(normalCard);
 			}
 		}
@@ -24,25 +34,25 @@ public class DeckInitializer {
 		return normalCards;
 	}
 	
-	public ArrayList<card.SpecialCard> createSpecialCards() {
-		ArrayList<card.SpecialCard> specialCards = new ArrayList<card.SpecialCard>();
+	public ArrayList<SpecialCard> createSpecialCards() {
+		ArrayList<SpecialCard> specialCards = new ArrayList<SpecialCard>();
 		
 		for(int i=0; i<4; i++) {
-			card.SpecialCard draw4 = new card.SpecialCard("Black", "DrawFour");
+			SpecialCard draw4 = new SpecialCard("wild", "drawfour");
 			specialCards.add(draw4);
 		}
 		
 		for(int i=0; i<4; i++) {
-			card.SpecialCard wild = new card.SpecialCard("Black", "Wild");
+			SpecialCard wild = new SpecialCard("wild", "color");
 			specialCards.add(wild);
 		}
 		
-		String[] colors = {"Yellow", "Red", "Blue", "Green"};
-		String[] attributes = {"Reverse", "Skip", "DrawTwo"};
+		String[] colors = {"yellow", "red", "blue", "green"};
+		String[] attributes = {"reverse", "skip", "drawtwo"};
 		
 		for(String color: colors) {
 			for(String attr: attributes) {
-				card.SpecialCard specialCard = new card.SpecialCard(color, attr);
+				SpecialCard specialCard = new SpecialCard(color, attr);
 				specialCards.add(specialCard);
 			}
 		}
@@ -50,34 +60,34 @@ public class DeckInitializer {
 		return specialCards;
 	}
 	
-	public pile.DrawPile createDrawPile(ArrayList<card.SpecialCard> specialCards, ArrayList<card.NormalCard> normalCards) {
-		ArrayList<card.Card> cardsDeck = new ArrayList<card.Card>();
+	public DrawPile createDrawPile(ArrayList<SpecialCard> specialCards, ArrayList<NormalCard> normalCards) {
+		ArrayList<Card> cardsDeck = new ArrayList<Card>();
 		
-		for(card.NormalCard nc: normalCards) {
+		for(NormalCard nc: normalCards) {
 			cardsDeck.add(nc);
 		}
 		
-		for(card.SpecialCard sc: specialCards) {
+		for(SpecialCard sc: specialCards) {
 			cardsDeck.add(sc);
 		}
 		
 		Collections.shuffle(cardsDeck);
 		
-		pile.DrawPile drawPile = new pile.DrawPile(cardsDeck);
+		DrawPile drawPile = new DrawPile(cardsDeck);
 		
 		return drawPile;
 	}
 	
 	public DeckInitializer() {
 		this.drawPile = this.createDrawPile(this.createSpecialCards(), this.createNormalCards());
-		this.discardPile = new pile.DiscardPile();
+		this.discardPile = new DiscardPile();
 	}
 	
-	public pile.DrawPile getDrawPile() {
+	public DrawPile getDrawPile() {
 		return this.drawPile;
 	}
 	
-	public pile.DiscardPile getDiscardPile() {
+	public DiscardPile getDiscardPile() {
 		return this.discardPile;
 	}
 }
